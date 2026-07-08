@@ -1,5 +1,19 @@
-// MOBILE MENU TOGGLE (si ou ajoute li pita)
-const nav = document.querySelector("nav ul");
+// MOBILE MENU TOGGLE
+const nav = document.querySelector("header nav");
+const menuToggle = document.querySelector(".menu-toggle");
+
+if (menuToggle && nav) {
+    menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+    });
+
+    // Fèmen meni an lè ou tape sou yon lyen
+    nav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            nav.classList.remove("active");
+        });
+    });
+}
 
 // Scroll effect header
 window.addEventListener("scroll", () => {
@@ -35,6 +49,9 @@ if (whatsappBtn) {
         whatsappBtn.style.transform = "scale(1.05)";
         setTimeout(() => {
             whatsappBtn.style.transform = "scale(1)";
+        }, 300);
+    }, 3000);
+}            whatsappBtn.style.transform = "scale(1)";
         }, 300);
     }, 3000);
 }
