@@ -1,71 +1,40 @@
-// ==========================================================================
-// THEOPHANIE MARKET LAKAY — v2.0
-// ==========================================================================
+// MOBILE MENU TOGGLE (si ou ajoute li pita)
+const nav = document.querySelector("nav ul");
 
-document.addEventListener("DOMContentLoaded", () => {
+// Scroll effect header
+window.addEventListener("scroll", () => {
+    const header = document.querySelector("header");
 
-    const header = document.getElementById("site-header");
-    const menuToggle = document.getElementById("menu-toggle");
-    const nav = document.getElementById("main-nav");
-
-    // --- Sticky header shrink/shadow on scroll ---
-    const onScroll = () => {
-        if (window.scrollY > 40) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
-        }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
-    // --- Mobile menu toggle ---
-    if (menuToggle && nav) {
-        menuToggle.addEventListener("click", () => {
-            const isOpen = nav.classList.toggle("open");
-            menuToggle.classList.toggle("open", isOpen);
-            menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-        });
-
-        // Close mobile menu after tapping a link
-        nav.querySelectorAll("a").forEach((link) => {
-            link.addEventListener("click", () => {
-                nav.classList.remove("open");
-                menuToggle.classList.remove("open");
-                menuToggle.setAttribute("aria-expanded", "false");
-            });
-        });
+    if (window.scrollY > 50) {
+        header.style.background = "#06281e";
+    } else {
+        header.style.background = "#0b3d2e";
     }
-
-    // --- Smooth scroll for in-page anchors ---
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-            const targetId = this.getAttribute("href");
-            const target = document.querySelector(targetId);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: "smooth" });
-            }
-        });
-    });
-
-    // --- Scroll reveal animation ---
-    const revealTargets = document.querySelectorAll(
-        ".stat, .card, .contact-card, .promo-text, .promo-badge"
-    );
-    revealTargets.forEach((el) => el.classList.add("reveal"));
-
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("is-visible");
-                    observer.unobserve(entry.target);
-                }
-            });
-        },
-        { threshold: 0.15 }
-    );
-
-    revealTargets.forEach((el) => observer.observe(el));
 });
+
+// Smooth scroll pou bouton yo
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const target = document.querySelector(this.getAttribute("href"));
+
+        if (target) {
+            target.scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+    });
+});
+
+// WhatsApp bouton animation (ti efè)
+const whatsappBtn = document.querySelector(".whatsapp-btn");
+
+if (whatsappBtn) {
+    setInterval(() => {
+        whatsappBtn.style.transform = "scale(1.05)";
+        setTimeout(() => {
+            whatsappBtn.style.transform = "scale(1)";
+        }, 300);
+    }, 3000);
+}
